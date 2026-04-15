@@ -59,7 +59,8 @@ nav {
   height: 44px;
   width: 44px;
   object-fit: contain;
-  border-radius: 50%;
+  /* Retrait du radius pour le logo HBM */
+  /* border-radius: 50%; */
 }
 
 .nav-logo-text {
@@ -108,14 +109,15 @@ nav {
   pointer-events: none;
 }
 
+/* Optimisation et agrandissement du logo central */
 .hero-logo {
-  width: 140px;
-  height: 140px;
+  width: min(300px, 60vw); /* Plus gros */
+  height: auto;
   object-fit: contain;
-  border-radius: 50%;
-  margin-bottom: 2rem;
-  animation: fadeUp 0.5s ease both;
-  filter: drop-shadow(0 0 24px rgba(34,139,34,0.4));
+  margin-bottom: 3rem;
+  animation: fadeUp 0.8s ease both; /* Animation plus douce */
+  filter: drop-shadow(0 0 30px rgba(34,139,34,0.5)); /* Effet plus prononcé */
+  opacity: 0.85; /* Légère transparence pour l'intégration */
 }
 
 .hero-saison {
@@ -124,7 +126,7 @@ nav {
   letter-spacing: 0.2em;
   color: var(--green-light);
   margin-bottom: 1rem;
-  animation: fadeUp 0.5s 0.15s ease both;
+  animation: fadeUp 0.8s 0.2s ease both;
 }
 
 .hero-sub {
@@ -132,7 +134,7 @@ nav {
   color: var(--muted);
   max-width: 480px;
   margin: 0 auto 2.5rem;
-  animation: fadeUp 0.5s 0.2s ease both;
+  animation: fadeUp 0.8s 0.4s ease both;
 }
 
 .hero-cta {
@@ -140,7 +142,7 @@ nav {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  animation: fadeUp 0.5s 0.25s ease both;
+  animation: fadeUp 0.8s 0.6s ease both;
 }
 
 .btn-primary {
@@ -512,112 +514,3 @@ footer {
     <p class="section-label">Contact</p>
     <h2>Je suis intéressé(e)</h2>
     <p>Remplis ce formulaire et nous te recontacterons dès que les entraînements seront organisés.</p>
-    
-    <form action="https://formspree.io/f/xqewepzw" method="POST" id="interest-form">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="prenom">Prénom</label>
-          <input type="text" name="prenom" id="prenom" placeholder="Jean" required>
-        </div>
-        <div class="form-group">
-          <label for="nom">Nom</label>
-          <input type="text" name="nom" id="nom" placeholder="Dupont" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="jean@exemple.fr" required>
-        </div>
-        <div class="form-group">
-          <label for="tel">Téléphone</label>
-          <input type="tel" name="telephone" id="tel" placeholder="06 00 00 00 00">
-        </div>
-        <div class="form-group">
-          <label for="niveau">Niveau</label>
-          <select name="niveau" id="niveau">
-            <option value="">— Sélectionner —</option>
-            <option value="Debutant">Débutant(e)</option>
-            <option value="Amateur">Amateur(e)</option>
-            <option value="Experimente">Expérimenté(e)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="ville">Ville</label>
-          <input type="text" name="ville" id="ville" placeholder="Mouy">
-        </div>
-        <div class="form-group full">
-          <label for="message">Message (optionnel)</label>
-          <textarea name="message" id="message" placeholder="Questions, disponibilités..."></textarea>
-        </div>
-      </div>
-      <div class="form-submit">
-        <button type="submit" class="btn-submit" id="btn-submit">Envoyer ma demande</button>
-      </div>
-      <div class="success-msg" id="success-msg">
-        Merci ! Nous avons bien reçu ta demande et te recontacterons très prochainement.
-      </div>
-    </form>
-  </div>
-</section>
-
-<div class="contact-bar">
-  <p>Handball Club Mouy — Oise, Hauts-de-France</p>
-  <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">
-    <div class="fb-icon">f</div>
-    Suivre sur Facebook
-  </a>
-</div>
-
-<footer>&copy; 2026 Handball Club Mouy — Tous droits réservés</footer>
-
-<script>
-const form = document.getElementById('interest-form');
-const successMsg = document.getElementById('success-msg');
-const btnSubmit = document.getElementById('btn-submit');
-
-form.addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  // Animation de chargement
-  form.style.opacity = '0.5';
-  btnSubmit.disabled = true;
-  btnSubmit.innerText = 'Envoi en cours...';
-
-  const data = new FormData(form);
-
-  try {
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (response.ok) {
-      // Succès
-      successMsg.style.display = 'block';
-      form.reset();
-      btnSubmit.innerText = 'Envoyé !';
-      setTimeout(() => {
-        successMsg.style.display = 'none';
-        btnSubmit.innerText = 'Envoyer ma demande';
-        btnSubmit.disabled = false;
-        form.style.opacity = '1';
-      }, 5000);
-    } else {
-      // Erreur serveur
-      alert("Oups ! Un problème est survenu. Merci de réessayer plus tard.");
-      btnSubmit.disabled = false;
-      btnSubmit.innerText = 'Envoyer ma demande';
-      form.style.opacity = '1';
-    }
-  } catch (error) {
-    // Erreur réseau
-    alert("Erreur de connexion. Vérifie ton internet.");
-    btnSubmit.disabled = false;
-    btnSubmit.innerText = 'Envoyer ma demande';
-    form.style.opacity = '1';
-  }
-});
-</script>
-
-</body>
-</html>
