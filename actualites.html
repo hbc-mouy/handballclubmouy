@@ -3,23 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>En construction - HBM</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<title>Actualités - HBM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root { --dark: #0a0f08; --green: #2db82d; --white: #f0f5f0; }
-body { background: var(--dark); color: var(--white); font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; margin: 0; }
-.container { padding: 20px; }
-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--green); letter-spacing: 2px; }
-p { font-size: 1.2rem; color: #7a9a7a; margin-bottom: 2rem; }
-.btn-back { border: 1px solid var(--green); color: var(--green); padding: 10px 25px; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; }
-.btn-back:hover { background: var(--green); color: white; }
+/* --- STYLES COMMUNS --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --dark: #0a0f08;
+  --dark2: #121a0e;
+  --green-mid: #228b22;
+  --green-bright: #3ddc3d;
+  --white: #f0f5f0;
+  --muted: #7a9a7a;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* --- NAV (Identique index) --- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(10,15,8,0.85);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(34,139,34,0.25);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+.nav-logo img { height: 45px; }
+.nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); letter-spacing: 1px; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+.nav-links a:hover { color: var(--green-bright); }
+
+/* --- HEADER PAGE --- */
+.page-header {
+  padding: 150px 20px 60px;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(34,139,34,0.1), transparent);
+}
+h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter-spacing: 2px; }
+
+/* --- GRILLE D'ACTUS --- */
+.news-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.news-card {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: 0.4s;
+  display: flex;
+  flex-direction: column;
+}
+.news-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--green-mid);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Zone Image (Placeholder si pas d'image) */
+.news-img {
+  width: 100%;
+  height: 200px;
+  background: #1a2514;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.news-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+
+.badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--green-mid);
+  color: white;
+  padding: 4px 12px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.news-content { padding: 25px; flex-grow: 1; }
+.news-date { color: var(--green-bright); font-size: 0.8rem; font-weight: 500; margin-bottom: 10px; display: block; }
+.news-title { font-family: var(--font-display); font-size: 1.8rem; line-height: 1.2; margin-bottom: 15px; }
+.news-excerpt { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+
+.read-more {
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+.read-more:hover { color: var(--green-bright); padding-left: 5px; }
+
+/* --- FOOTER --- */
+footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
+
+@media (max-width: 800px) { .nav-links { display: none; } }
 </style>
 </head>
 <body>
-<div class="container">
-    <h1>PAGE EN CONSTRUCTION</h1>
-    <p>Le club HBM se prépare. Cette page sera bientôt disponible !</p>
-    <a href="index.html" class="btn-back">Retour à l'accueil</a>
-</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="HBM">
+    <span class="nav-logo-text">HBM</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="actualites.html">Actualités</a></li>
+    <li><a href="equipes.html">Équipes</a></li>
+    <li><a href="inscriptions.html">Inscriptions</a></li>
+    <li><a href="partenaires.html">Partenaires</a></li>
+    <li><a href="boutique.html">Boutique</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <h1>L'ÉCHO DU TERRAIN</h1>
+  <p style="color: var(--muted);">Suivez l'évolution du Handball Club Mouy en temps réel.</p>
+</header>
+
+<main class="news-container">
+  
+  <article class="news-card">
+    <div class="news-img">
+      <div class="badge">SPONSOR</div>
+      <img src="images/lv-chauff.png" alt="Partenariat LV Chauff" style="object-fit: contain; padding: 20px;">
+    </div>
+    <div class="news-content">
+      <span class="news-date">16 AVRIL 2026</span>
+      <h2 class="news-title">LV CHAUFF REJOINT L'AVENTURE !</h2>
+      <p class="news-excerpt">Nous sommes fiers d'annoncer notre premier partenariat officiel avec LV CHAUFF. Un soutien de poids pour le lancement du club.</p>
+      <a href="#" class="read-more">LIRE LA SUITE →</a>
+    </div>
+  </article>
+
+  <article class="news-card">
+    <div class="news-img">
+      <div class="badge">CLUB</div>
+      <span style="font-size: 4rem;">🤾‍♂️</span>
+    </div>
+    <div class="news-content">
+      <span class="news-date">14 AVRIL 2026</span>
+      <h2 class="news-title">EN PLEINE PHASE DE RECRUTEMENT</h2>
+      <p class="news-excerpt">L'effectif se construit rapidement ! Une dizaine de passionnés ont déjà répondu à l'appel. Et si vous étiez le prochain ?</p>
+      <a href="index.html#contact" class="read-more">REJOINDRE L'ÉQUIPE →</a>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  &copy; 2026 HBM — Handball Club Mouy — L'aventure ne fait que commencer.
+</footer>
+
 </body>
 </html>
