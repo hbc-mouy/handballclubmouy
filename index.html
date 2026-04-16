@@ -40,11 +40,12 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 3rem;
-  background: rgba(10,15,8,0.9);
+  background: rgba(10,15,8,0.85);
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(34,139,34,0.25);
 }
-.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; cursor: pointer; z-index: 1001; }
+.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; cursor: pointer; z-index: 1100; transition: 0.3s; }
+.nav-logo:hover { transform: scale(1.05); }
 .nav-logo img { height: 45px; width: auto; }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-light); letter-spacing: 0.05em; }
 
@@ -55,30 +56,76 @@ nav {
 .nav-links a:hover { color: var(--green-bright); }
 .nav-links a:hover::after { width: 100%; }
 
-/* BURGER MENU */
-.burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
-.burger div { width: 25px; height: 3px; background: var(--green-bright); transition: 0.3s; }
+/* BURGER */
+.burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
+.burger div { width: 28px; height: 2px; background: var(--green-bright); transition: 0.4s; }
 
-/* HERO & SECTIONS */
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 20px 60px; background: radial-gradient(circle at center, rgba(34,139,34,0.1) 0%, transparent 70%); }
-.hero-logo { width: min(320px, 70vw); height: auto; margin-bottom: 2rem; filter: drop-shadow(0 0 15px rgba(34,139,34,0.4)); animation: float 4s ease-in-out infinite; }
-.hero-saison { font-family: var(--font-display); font-size: 1.5rem; color: var(--green-bright); letter-spacing: 0.4em; margin-bottom: 1rem; }
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 20px 60px;
+  background: radial-gradient(circle at center, rgba(34,139,34,0.1) 0%, transparent 70%);
+}
+.hero-logo {
+  width: min(320px, 70vw);
+  height: auto;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 15px rgba(34,139,34,0.4));
+  animation: float 4s ease-in-out infinite, fadeIn 1.2s ease-out;
+}
+.hero-saison { font-family: var(--font-display); font-size: 1.5rem; color: var(--green-bright); letter-spacing: 0.4em; margin-bottom: 1rem; animation: slideIn 1s ease-out; }
 .hero-sub { max-width: 650px; font-size: 1.2rem; color: var(--white); margin-bottom: 2.5rem; opacity: 0.8; }
+
+/* SECTIONS */
 h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; margin-bottom: 1.5rem; color: var(--white); }
 
 .about { padding: 120px 3rem; background: var(--dark); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.stat-card { border: 1px solid rgba(34,139,34,0.2); padding: 2.5rem 1.5rem; background: rgba(255,255,255,0.02); transition: 0.4s; position: relative; overflow: hidden; }
+.stat-card { 
+  border: 1px solid rgba(34,139,34,0.2); 
+  padding: 2.5rem 1.5rem; 
+  background: rgba(255,255,255,0.02); 
+  transition: 0.4s; 
+  position: relative;
+  overflow: hidden;
+}
 .stat-card:hover { transform: translateY(-10px); border-color: var(--green-bright); background: rgba(34,139,34,0.05); }
-.stat-number { font-family: var(--font-display); font-size: 3rem; color: var(--green-bright); }
-.stat-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--green-mid); transform: scaleY(0); transition: 0.3s; }
+.stat-card:hover::before { transform: scaleY(1); }
+.stat-number { font-family: var(--font-display); font-size: 3rem; color: var(--green-bright); line-height: 1; }
+.stat-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-.form-section { background: var(--dark2); padding: 120px 20px; border-top: 1px solid rgba(34,139,34,0.15); }
-.form-container { max-width: 700px; margin: 0 auto; }
-.btn-primary { background: var(--green-mid); color: white; padding: 1.2rem 3rem; text-decoration: none; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.1em; transition: 0.4s; display: inline-block; cursor: pointer; border: none; }
-.btn-primary:hover { background: var(--green-bright); transform: scale(1.05); }
+/* FORM */
+.form-section { background: var(--dark2); padding: 120px 20px; border-top: 1px solid rgba(34,139,34,0.15); position: relative; }
+.form-container { max-width: 700px; margin: 0 auto; z-index: 2; position: relative; }
+input, select, textarea { 
+  width: 100%; padding: 12px; background: rgba(255,255,255,0.03); 
+  border: 1px solid rgba(34,139,34,0.3); color: white; border-radius: 4px; font-family: var(--font-body);
+}
+input:focus { outline: none; border-color: var(--green-bright); background: rgba(34,139,34,0.1); }
 
-/* MOBILE RESPONSIVE */
+/* BOUTON */
+.btn-primary {
+  background: var(--green-mid);
+  color: white;
+  padding: 1.2rem 3rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  transition: 0.4s;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--green-bright); transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 30px rgba(34,139,34,0.3); }
+
+/* RESPONSIVE MOBILE */
 @media (max-width: 950px) {
   nav { padding: 1rem 1.5rem; }
   .burger { display: flex; }
@@ -87,24 +134,29 @@ h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); line
     right: -100%;
     top: 0;
     height: 100vh;
-    width: 80%;
-    background: var(--dark2);
+    width: 100%;
+    background: var(--dark);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: 0.5s;
+    transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
     z-index: 1000;
   }
   .nav-links.active { right: 0; }
-  .nav-links a { font-size: 1.5rem; }
+  .nav-links a { font-size: 1.8rem; font-family: var(--font-display); }
   .about { grid-template-columns: 1fr; padding: 60px 1.5rem; text-align: center; }
+  .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+  .burger.toggle .line2 { opacity: 0; }
+  .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 }
 
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
 .contact-bar { padding: 4rem 3rem; background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
 .social-group { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
-.social-link { color: var(--green-bright); text-decoration: none; transition: 0.3s; }
+.social-link { color: var(--green-bright); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: 0.3s; }
 footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8rem; background: var(--dark2); }
 </style>
 </head>
@@ -117,9 +169,9 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
   </div>
   
   <div class="burger" id="burger">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
   </div>
 
   <ul class="nav-links" id="nav-links">
@@ -133,45 +185,65 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
   </ul>
 </nav>
 
-<section class="hero">
+<section class="hero" id="accueil">
   <img src="images/logo.png" alt="Logo HBM" class="hero-logo">
   <p class="hero-saison">SAISON 2026 — 2027</p>
   <p class="hero-sub">Le Handball Club Mouy s'éveille. Un projet ambitieux, une équipe soudée, et bientôt... vos premiers exploits sur le terrain.</p>
   <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
 
-<section class="about">
+<section class="about" id="about">
   <div>
     <h2>Propulsons le Hand à Mouy</h2>
     <p>Le HBM est un club en cours de création, porté par des passionnés qui souhaitent offrir une structure sportive conviviale et ambitieuse.</p>
+    <p>Peu importe votre niveau, c'est votre envie de construire ce club avec nous qui fera la différence.</p>
   </div>
   <div class="stats-grid">
-    <div class="stat-card"><div class="stat-number">2026</div><div class="stat-label">Lancement</div></div>
-    <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">Passion</div></div>
+    <div class="stat-card">
+      <div class="stat-number">2026</div>
+      <div class="stat-label">Lancement Officiel</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Passion Mouysarde</div>
+    </div>
   </div>
 </section>
 
 <section class="form-section" id="contact">
   <div class="form-container">
     <h2 style="text-align: center;">REJOINDRE LE CLUB</h2>
+    <p style="text-align: center; color: var(--muted); margin-bottom: 3rem;">Inscrivez-vous pour être les premiers informés.</p>
+    
     <form action="https://formspree.io/f/xqewepzw" method="POST" id="interest-form">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-        <input type="text" name="prenom" placeholder="Prénom" required style="padding:10px; background:#1a2514; border:1px solid #228b22; color:white;">
-        <input type="text" name="nom" placeholder="Nom" required style="padding:10px; background:#1a2514; border:1px solid #228b22; color:white;">
-        <input type="email" name="email" placeholder="Email" required style="padding:10px; background:#1a2514; border:1px solid #228b22; color:white;">
-        <input type="tel" name="telephone" placeholder="Téléphone" style="padding:10px; background:#1a2514; border:1px solid #228b22; color:white;">
+        <div><label>Prénom</label><input type="text" name="prenom" required></div>
+        <div><label>Nom</label><input type="text" name="nom" required></div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Téléphone</label><input type="tel" name="telephone"></div>
+        <div>
+          <label>Niveau</label>
+          <select name="niveau">
+            <option value="debutant">Débutant</option>
+            <option value="intermediaire">Déjà joué</option>
+            <option value="expert">Compétition</option>
+          </select>
+        </div>
+        <div><label>Ville</label><input type="text" name="ville"></div>
       </div>
+      <div style="margin-top:1.5rem;"><label>Message (optionnel)</label><textarea name="message" rows="4"></textarea></div>
       <button type="submit" id="btn-submit" class="btn-primary" style="width:100%; margin-top:2rem;">ENVOYER MA DEMANDE</button>
-      <div id="success-msg" style="display:none; color:var(--green-bright); text-align:center; margin-top:1.5rem;">Message envoyé !</div>
+      <div id="success-msg" style="display:none; color:var(--green-bright); text-align:center; margin-top:1.5rem; font-weight:bold;">Message envoyé !</div>
     </form>
   </div>
 </section>
 
 <div class="contact-bar">
   <div class="social-group">
-    <a href="mailto:Handball.mouy@gmail.com" class="social-link">Email</a>
-    <a href="https://www.facebook.com/profile.php?id=61572143188788" class="social-link">Facebook</a>
-    <a href="https://www.instagram.com/handball.mouy/" class="social-link">Instagram</a>
+    <a href="mailto:Handball.mouy@gmail.com" class="social-link">✉ Email</a>
+    <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">FB Facebook</a>
+    <a href="https://www.instagram.com/handball.mouy/" target="_blank" class="social-link">IG Instagram</a>
+    <a href="https://www.tiktok.com/@mouy.handball" target="_blank" class="social-link">TK TikTok</a>
   </div>
 </div>
 
@@ -181,33 +253,32 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
 // --- MENU MOBILE ---
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
-
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
-    // Animation du burger
     burger.classList.toggle('toggle');
 });
-
-// Fermer le menu quand on clique sur un lien
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
+        burger.classList.remove('toggle');
     });
 });
 
-// --- GESTION FORMULAIRE ---
+// --- FORMULAIRE ---
 const form = document.getElementById('interest-form');
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('btn-submit');
-  btn.innerText = 'ENVOI...';
+  btn.innerText = 'ENVOI EN COURS...';
   const data = new FormData(form);
-  const response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-  if (response.ok) { 
-    document.getElementById('success-msg').style.display = 'block'; 
-    form.reset(); 
-    btn.innerText = 'ENVOYÉ !';
-  }
+  try {
+    const response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+    if (response.ok) {
+      document.getElementById('success-msg').style.display = 'block';
+      form.reset();
+      btn.innerText = 'C\'EST REÇU !';
+    }
+  } catch (error) { alert("Erreur."); }
 });
 
 // --- EASTER EGG ---
@@ -215,11 +286,23 @@ let logoClickCount = 0;
 document.getElementById('logo-trigger').addEventListener('click', () => {
     logoClickCount++;
     if (logoClickCount === 5) {
-        alert("ALLEZ MOUY ! 💚");
+        lancerAnimationSupporter();
         logoClickCount = 0;
     }
+    setTimeout(() => { logoClickCount = 0; }, 3000);
 });
-</script>
 
+function lancerAnimationSupporter() {
+    for (let i = 0; i < 30; i++) {
+        const ball = document.createElement('div');
+        ball.innerText = '🤾';
+        ball.style.position = 'fixed'; ball.style.left = Math.random() * 100 + 'vw';
+        ball.style.top = '-50px'; ball.style.zIndex = '9999';
+        ball.style.transition = `transform ${Math.random() * 2 + 1}s linear`;
+        document.body.appendChild(ball);
+        setTimeout(() => { ball.style.transform = `translateY(${window.innerHeight + 100}px)`; }, 100);
+    }
+}
+</script>
 </body>
 </html>
