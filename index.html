@@ -48,8 +48,8 @@ nav {
 .nav-logo img { height: 45px; width: auto; }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-light); letter-spacing: 0.05em; }
 
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
 .nav-links a:hover { color: var(--green-bright); }
 
 /* HERO */
@@ -160,9 +160,9 @@ input:focus, textarea:focus { border-color: var(--green-bright); background: rgb
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
   .about { grid-template-columns: 1fr; padding: 60px 1.5rem; }
-  .nav-links { display: none; }
+  .nav-links { display: none; } /* On cache le menu complexe sur mobile pour l'instant */
   .form-grid { grid-template-columns: 1fr; }
   .full { grid-column: span 1; }
   .contact-bar { flex-direction: column; gap: 2rem; text-align: center; }
@@ -173,12 +173,15 @@ input:focus, textarea:focus { border-color: var(--green-bright); background: rgb
 <body>
 
 <nav>
-  <a href="#accueil" class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <img src="images/logo.png" alt="HBM Logo">
     <span class="nav-logo-text">HBM</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#about">Le Projet</a></li>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="equipes.html">Équipes</a></li>
+    <li><a href="inscriptions.html">Inscriptions</a></li>
+    <li><a href="boutique.html">Boutique</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
