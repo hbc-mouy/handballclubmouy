@@ -79,7 +79,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* Zone Image (Placeholder si pas d'image) */
+/* Zone Image */
 .news-img {
   width: 100%;
   height: 200px;
@@ -90,7 +90,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
   position: relative;
   overflow: hidden;
 }
-.news-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+.news-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
 
 .badge {
   position: absolute;
@@ -102,6 +102,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
   font-family: var(--font-display);
   font-size: 0.9rem;
   letter-spacing: 1px;
+  z-index: 2;
 }
 
 .news-content { padding: 25px; flex-grow: 1; }
@@ -151,6 +152,19 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
 </header>
 
 <main class="news-container">
+
+  <article class="news-card">
+    <div class="news-img">
+      <div class="badge">SPONSOR</div>
+      <img src="images/sirocco.png" alt="Partenariat Sirocco" style="object-fit: contain; padding: 20px;">
+    </div>
+    <div class="news-content">
+      <span class="news-date">17 AVRIL 2026</span>
+      <h2 class="news-title">SIROCCO EMBARQUE AVEC LE HBM</h2>
+      <p class="news-excerpt">Un nouveau partenaire de confiance nous rejoint ! Merci à Sirocco pour son engagement envers le sport local et le projet HBM.</p>
+      <a href="partenaires.html" class="read-more">VOIR NOS PARTENAIRES →</a>
+    </div>
+  </article>
   
   <article class="news-card">
     <div class="news-img">
